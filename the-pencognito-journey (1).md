@@ -1,5 +1,7 @@
 # The Pencognito Journey
 
+video: https://drive.google.com/drive/folders/1CrKREOut6gELZ2CKV5HxmE8iGY7YMr3a
+
 It started simple enough: an ESP32-CAM, two L298N motor drivers, and an idea to build a little rover I could drive around from my laptop while watching its point of view through a live video feed. Nothing fancy at first — just wire the motors up, get the camera streaming, and slap together a web page with some directional buttons so I could poke at it from my phone if I wanted to.
 
 The ESP32 side came together as two separate little web servers living on the same board: one on port 80 handling plain HTTP routes like `/forward`, `/left`, `/stop` — dead simple, just flip some GPIO pins high or low depending on which route got hit — and a second one on port 81 whose only job was to keep pumping out an MJPEG stream from the camera. Two ports because the ESP32's HTTP server library gets cranky trying to do continuous video streaming and quick request/response control on the same handler at the same time, so splitting them kept everything responsive.
