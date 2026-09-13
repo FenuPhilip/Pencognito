@@ -2,6 +2,13 @@
 
 video: https://drive.google.com/drive/folders/1CrKREOut6gELZ2CKV5HxmE8iGY7YMr3a
 
+The vision was simple. A really simple Raspi and pi-cam based mischievous desktop bot , that brings chaos , and pens are it's usual target. But the night itself had twists for us. The pi board got fried. 
+
+All hopes were lost. 
+Really? , twists again! 
+
+The cameo - But fortunately, we had our savior, actually in our side pocket. The ESP32-cam module. though we had to change the whole system architecture just to make this new guy do the same work.
+
 It started simple enough: an ESP32-CAM, two L298N motor drivers, and an idea to build a little rover I could drive around from my laptop while watching its point of view through a live video feed. Nothing fancy at first — just wire the motors up, get the camera streaming, and slap together a web page with some directional buttons so I could poke at it from my phone if I wanted to.
 
 The ESP32 side came together as two separate little web servers living on the same board: one on port 80 handling plain HTTP routes like `/forward`, `/left`, `/stop` — dead simple, just flip some GPIO pins high or low depending on which route got hit — and a second one on port 81 whose only job was to keep pumping out an MJPEG stream from the camera. Two ports because the ESP32's HTTP server library gets cranky trying to do continuous video streaming and quick request/response control on the same handler at the same time, so splitting them kept everything responsive.
@@ -25,3 +32,6 @@ And then, because a chasing robot alone wasn't quite enough, I added a second mo
 Which is how this thing ended up, in its final form, as a small WiFi rover that hunts down anything red in its camera's view, closes in on it with genuinely tuned PID steering instead of just lurching around, and takes a swing at it with a second motor when it arrives — which is exactly the kind of unhinged desk-side chaos gremlin that "sneaks up and messes with whatever red object catches its eye on your desk" energy that makes it fun rather than just another remote-control car.
 
 The most recent chapter was just getting the laptop and the board talking to each other reliably again — a timeout that turned out to be the laptop script pointed at the wrong port for the video stream (it needed to be 81, not 80, since that's where the stream server actually lives on the ESP32 side), and then a 404 after that fix, which usually means the board answered but the currently-running firmware didn't actually have the route being asked for — worth double-checking with a fresh reflash and a look at the Serial Monitor on boot to confirm the camera initialized properly and the board actually got to the point of registering its handlers.
+
+Actually it was cool and to watch the bot sneaking to the target really slow , tracking it without missing, and when within range , a sudden and unexpected blow sends it flying. we saw the audience watching it patiently ,in anticipation 
+whether it will strike or not , like watching a football game. should have seen the faces when they understood what the motor arm mounted on the top is for. we were able to create that element of surprise.
